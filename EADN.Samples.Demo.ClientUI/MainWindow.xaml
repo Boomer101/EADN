@@ -1,0 +1,40 @@
+﻿<Window x:Class="EADN.Samples.Demo.ClientUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:demoContracts="clr-namespace:EADN.Samples.Demo.Contracts;assembly=EADN.Samples.Demo.Contracts"
+        xmlns:local="clr-namespace:EADN.Samples.Demo.ClientUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+    <ObjectDataProvider MethodName="GetValues"
+        ObjectType="{x:Type demoContracts:DemoEnum}"
+        x:Key="MyEnumValues">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="demoContracts:DemoEnum" />
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+        <ObjectDataProvider MethodName="GetValues"
+        ObjectType="{x:Type demoContracts:DemoData}"
+        x:Key="MyDemoDataValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="demoContracts:DemoData" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Click="AppDomain_Clicked">App Domain Name</Button>
+            <Button Click="SetValueButton_Clicked">Set Value</Button>
+            <Button Click="GetValueButton_Clicked">Get Value</Button>
+            <Button Click="NextEnumButton_Clicked">Next Enum</Button>
+            <Button Click="FillinList_Clicked">Fill in List</Button>
+        </StackPanel>
+        <TextBlock Name="AppDomainNameServer" DockPanel.Dock="Top"/>
+        <TextBox Name="ValueEntry" DockPanel.Dock="Top"/>
+        <TextBlock Name="ValueRead" DockPanel.Dock="Top"/>
+        <ComboBox Name="EnumValue" DockPanel.Dock="Top"  ItemsSource="{Binding Source={StaticResource MyEnumValues}}" />
+        <ListBox Name="DataList" ItemsSource="{Binding Source={StaticResource MyDemoDataValues}}" />
+    </DockPanel>
+</Window>
