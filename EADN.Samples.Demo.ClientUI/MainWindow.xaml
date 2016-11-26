@@ -31,10 +31,14 @@
             <Button Click="NextEnumButton_Clicked">Next Enum</Button>
             <Button Click="FillinList_Clicked">Fill in List</Button>
         </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Click="Elaborate_Clicked">Elaborate Service</Button>
+        </StackPanel>
         <TextBlock Name="AppDomainNameServer" DockPanel.Dock="Top"/>
         <TextBox Name="ValueEntry" DockPanel.Dock="Top"/>
         <TextBlock Name="ValueRead" DockPanel.Dock="Top"/>
         <ComboBox Name="EnumValue" DockPanel.Dock="Top"  ItemsSource="{Binding Source={StaticResource MyEnumValues}}" />
         <ListBox Name="DataList" ItemsSource="{Binding Source={StaticResource MyDemoDataValues}}" />
+        <TextBox Name="ElaborateValue" DockPanel.Dock="Top"/>
     </DockPanel>
 </Window>

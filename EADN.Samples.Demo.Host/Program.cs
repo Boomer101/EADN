@@ -14,13 +14,14 @@ namespace EADN.Samples.Demo.Host
         static void Main(string[] args)
         {
             ServiceHost serviceHost = null;
+            ServiceHost elaborateServiceHost = null;
 
             try
             {
                 // Host erzeugen
                 serviceHost = new ServiceHost(typeof(DemoService));
 
-                // Konfigurieren CBA
+                // Konfigurieren CBA -> deklarativ
                 //serviceHost.AddServiceEndpoint(
                 //    typeof(IDemo), 
                 //    new BasicHttpBinding(), 
@@ -28,6 +29,10 @@ namespace EADN.Samples.Demo.Host
 
                 // Starten
                 serviceHost.Open();
+                
+                // Deklarativ konfiguriert -> app.config
+                elaborateServiceHost = new ServiceHost(typeof(ElaborateService));
+                elaborateServiceHost.Open();
 
                 Console.WriteLine("Host is running...");
                 Console.ReadKey();
@@ -41,8 +46,10 @@ namespace EADN.Samples.Demo.Host
                 if(serviceHost != null)
                 {
                     serviceHost.Close();
-                    // C# 6.0: serviceHost?.Close();
                 }
+
+                // C# 6.0:
+                elaborateServiceHost?.Close();
             }
         }
     }

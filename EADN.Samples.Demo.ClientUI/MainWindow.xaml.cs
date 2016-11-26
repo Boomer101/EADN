@@ -1,21 +1,9 @@
 ﻿using EADN.Samples.Demo.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Configuration;
+//using System.Windows.Data;
 
 namespace EADN.Samples.Demo.ClientUI
 {
@@ -26,7 +14,9 @@ namespace EADN.Samples.Demo.ClientUI
     {
         double setValue;
 
-        private IClientChannel Proxy = null;
+        private IDemo DemoProxy = null;
+
+        private IElaborateService ElaboratePerSessionServiceProxy = null;
 
         public MainWindow()
         {
@@ -35,22 +25,29 @@ namespace EADN.Samples.Demo.ClientUI
 
         private T GetProxy<T>()
         {
-            if(Proxy != null && Proxy.State == CommunicationState.Opened)
+
+            return GetProxy<T>((T)DemoProxy, new BasicHttpBinding(), "http://localhost:4711/DemoService");
+        }
+        public static T GetProxy<T>(T proxy, Binding binding, string address)
+        {
+            IClientChannel proxyImpl = proxy as IClientChannel;
+
+            if (proxy != null && proxyImpl.State == CommunicationState.Opened)
             {
-                return (T)Proxy;
+                return (T)proxy;
             }
-            else if(Proxy != null && Proxy.State == CommunicationState.Faulted)
+            else if (proxy != null && proxyImpl.State == CommunicationState.Faulted)
             {
-                Proxy.Abort();
+                proxyImpl.Abort();
             }
+            proxy = ChannelFactory<T>.CreateChannel(
+                binding,
+                new EndpointAddress(address));
+            return (T)proxy;
 
-            Proxy = ChannelFactory<T>.CreateChannel(
-                new BasicHttpBinding(),
-                new EndpointAddress("http://localhost:4711/DemoService")) as IClientChannel;
-
-            //Proxy = ChannelFactory<T>.CreateChannel("ClientDeclarative");
-
-            return (T)Proxy;
+            // TODO
+            // Proxy = ChannelFactory<T>.CreateChannel("ClientDeclarative");
+            // Verschieben, raus aus dem UI Code
         }
 
         private void AppDomain_Clicked(object sender, RoutedEventArgs e)
@@ -90,12 +87,24 @@ namespace EADN.Samples.Demo.ClientUI
             EnumValue.SelectedItem = newEnum;
         }
 
+        private void Elaborate_Clicked(object sender, RoutedEventArgs e)
+        {
+            ElaboratePerSessionServiceProxy = GetProxy<IElaborateService>(
+              ElaboratePerSessionServiceProxy,
+              new NetTcpBinding(),
+              "net.tcp://localhost:4712/ElaborateService");
+
+            string result = ElaboratePerSessionServiceProxy.GetData("TEST");
+
+            ElaborateValue.Text = result;
+        }
+
         private void FillinList_Clicked(object sender, RoutedEventArgs e)
         {
             DemoData data = new DemoData
             {
-                //Date = DateTime.Now.Date,
-                //Name = "Test"
+                Date = DateTime.Now.Date,
+                Name = "Test"
             };
 
             try
@@ -114,7 +123,7 @@ namespace EADN.Samples.Demo.ClientUI
             }
             finally
             {
-                var channelProxy = (IChannel)Proxy;
+                var channelProxy = (IChannel)DemoProxy;
 
                 if (channelProxy != null && channelProxy.State == CommunicationState.Opened)
                 {
@@ -122,5 +131,6 @@ namespace EADN.Samples.Demo.ClientUI
                 }
             }
         }
+      
     }
 }

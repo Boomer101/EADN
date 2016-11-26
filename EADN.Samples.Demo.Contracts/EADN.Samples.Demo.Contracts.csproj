@@ -46,6 +46,7 @@
     <Compile Include="DemoData.cs" />
     <Compile Include="DemoEnum.cs" />
     <Compile Include="IDemo.cs" />
+    <Compile Include="IElaborateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
