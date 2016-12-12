@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="DemoService.cs" />
     <Compile Include="ElaborateService.cs" />
+    <Compile Include="ElaborateServicePerCall.cs" />
+    <Compile Include="ElaborateServiceSingle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

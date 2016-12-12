@@ -1,5 +1,4 @@
-﻿using EADN.Samples.Demo.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -8,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace EADN.Samples.Demo.Implementation
 {
-    public sealed class ElaborateService : IElaborateService
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public sealed class ElaborateServiceSingle : Contracts.IElaborateService
     {
         public string CurrentData { get; set; } = string.Empty;
-
         public string GetData(string param)
         {
             CurrentData += " " + param;
