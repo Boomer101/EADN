@@ -25,7 +25,6 @@ namespace EADN.Samples.Demo.ClientUI
 
         private T GetProxy<T>()
         {
-
             return GetProxy<T>((T)DemoProxy, new BasicHttpBinding(), "http://localhost:4711/DemoService");
         }
         public static T GetProxy<T>(T proxy, Binding binding, string address)
@@ -131,6 +130,5 @@ namespace EADN.Samples.Demo.ClientUI
                 }
             }
         }
-      
     }
 }

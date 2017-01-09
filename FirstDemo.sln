@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EADN.Samples.Demo.ClientUI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EADN.Samples.Demo.WindowsServiceHost", "EADN.Samples.Demo.WindowsServiceHost\EADN.Samples.Demo.WindowsServiceHost.csproj", "{D14BDAF8-EB05-4273-9DDC-15312DA4B72B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EADN.Samples.Demo.WebHost", "EADN.Samples.Demo.WebHost\EADN.Samples.Demo.WebHost.csproj", "{8FAAD5D0-160F-4AA7-8CDE-3C5041169DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D14BDAF8-EB05-4273-9DDC-15312DA4B72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D14BDAF8-EB05-4273-9DDC-15312DA4B72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D14BDAF8-EB05-4273-9DDC-15312DA4B72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FAAD5D0-160F-4AA7-8CDE-3C5041169DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FAAD5D0-160F-4AA7-8CDE-3C5041169DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FAAD5D0-160F-4AA7-8CDE-3C5041169DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FAAD5D0-160F-4AA7-8CDE-3C5041169DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
