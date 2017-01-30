@@ -20,6 +20,10 @@ namespace EADN.Samples.WebDemo.Controllers
         // GET: Quiz
         public ActionResult Index()
         {
+            // WebViewPage Elemente auslesen
+            string serverPath = Server.MapPath("App_Data");
+            var httpRequest = Request;
+
             return View(QuizCollection);
         }
 
