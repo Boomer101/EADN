@@ -115,6 +115,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\QuizController.cs" />
+    <Compile Include="Filters\MyActionFilter.cs" />
+    <Compile Include="Filters\ProjectErrorFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

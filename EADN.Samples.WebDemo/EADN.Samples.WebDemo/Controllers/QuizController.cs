@@ -1,4 +1,5 @@
-﻿using EADN.Samples.WebDemo.Models;
+﻿using EADN.Samples.WebDemo.Filters;
+using EADN.Samples.WebDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace EADN.Samples.WebDemo.Controllers
 {
+    [MyActionFilter]
     public class QuizController : Controller
     {
         private static List<QuizViewModel> QuizCollection = new List<QuizViewModel>()
@@ -52,8 +54,21 @@ namespace EADN.Samples.WebDemo.Controllers
             }
             else
             {
-                // TODO: Send error msg to user
-                throw new NotImplementedException();
+                try
+                {
+                    HttpContext.Application.Lock();
+                    HttpContext.Application["Test1"] = "Data1";
+                    HttpContext.Application["Test2"] = "Data2";
+
+                    // Do something...
+                    // HttpContext.Session. -> Extension Method schreiben
+
+                    return View("");
+                }
+                finally
+                {
+                    HttpContext.Application.UnLock(); // Unlock nach Lock nie vergessen !
+                }
             }
         }
 
@@ -72,6 +87,24 @@ namespace EADN.Samples.WebDemo.Controllers
         {
             // TODO
             throw new NotImplementedException();
+        }
+
+        //In die Verarbeitung des Controllers eingreifen
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+        }
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
+        }
+        protected override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            base.OnResultExecuting(filterContext);
+        }
+        protected override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+            base.OnResultExecuted(filterContext);
         }
     }
 }

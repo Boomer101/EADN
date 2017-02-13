@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EADN.Samples.WebDemo.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,9 @@ namespace EADN.Samples.WebDemo
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            // ProjectErrorFilter global definieren
+            GlobalFilters.Filters.Add(new ProjectErrorFilter());
         }
     }
 }
